@@ -1,0 +1,10 @@
+---
+- name: reset password for user
+  user:
+    name: "{{ item.key }}"
+    comment: "{{ item.value.comment }}"
+    update_password: always
+    password: "{{ item.value.password }}"
+    force: yes
+    state: present
+  with_dict: "{{ reset_lst }}"

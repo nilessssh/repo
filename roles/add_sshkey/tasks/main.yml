@@ -1,0 +1,68 @@
+---
+- name: check if user exists
+  shell: getent passwd "{{ user }}" | /usr/bin/wc -l | tr -d ''
+  register: user_exist
+
+
+
+
+- name: add user to remote host
+  user:
+    name: "{{ user }}"
+    password: "{{ password }}" 
+    state: present
+    force: yes
+  when: user_exist.stdout == "0"
+
+
+
+- name: adding sudo access for "{{ user }}"
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '"{{ user }}"'
+    line: '"{{ user }}" ALL=(ALL) NOPASSWD: ALL'
+  when: user_exist.stdout == "0"
+
+
+
+- name: check .ssh local directory exists
+  stat:
+    path: /home/"{{ user }}"/.ssh
+  register: ssh_directory_exists_check
+
+
+
+- name: creating .ssh directory
+  file:
+    path: /home/{{ user }}/.ssh/
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+  when: ssh_directory_exists_check.stat.exists == False
+
+
+
+- name: check if authorized_keys exists
+  stat:
+    path: /home/{{ user }}/.ssh/authorized_keys
+  register: auth_keys
+
+
+
+- name: create authorized_keys file if does not exists
+  file:
+    path: /home/{{ user }}/.ssh/authorized_keys
+    state: touch
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+  when: auth_keys.stat.exists == False
+
+
+
+- name: push key to hosts
+  lineinfile:
+    path: /home/{{ user }}/.ssh/authorized_keys
+    line: "{{ ssh_key }}"

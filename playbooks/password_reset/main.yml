@@ -1,0 +1,5 @@
+---
+- hosts: hosts
+  gather_facts: false
+  roles:
+    - password_reset
