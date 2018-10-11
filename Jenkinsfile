@@ -4,7 +4,7 @@ sh 'git config --global http.sslVerify false'
 stage("testing ") {
 checkout scm
 sh """
-zip -r roles.zip roles | cp roles.zip /home/
+sudo ip -r roles.zip roles | cp roles.zip /home/
 echo hmmmm
 """
 }
