@@ -7,9 +7,6 @@ checkout scm
 sh """
 zip -r roles.zip roles
 echo hmmmm
-git add *
-git commit -m "asdf"
-git push
 """
 }
 }
