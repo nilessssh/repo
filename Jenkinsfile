@@ -1,7 +1,7 @@
 #!/usr/bin/groovy 
+def scmVars
 node('master') {
 sh 'git config --global http.sslVerify false'
-def scmVars
 stage("testing ") {
 checkout scm
 sh """
