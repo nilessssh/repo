@@ -5,7 +5,7 @@ stage("testing ") {
 properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/1 * * * *')])])
 checkout scm
 sh """
-env.BRANCH_NAME
+echo env.BRANCH_NAME
 zip -r roles.zip *
 echo hmmmm
 """
