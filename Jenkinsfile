@@ -5,7 +5,8 @@ stage("testing ") {
 checkout scm
 sh """
 branch=`printenv | grep NODE_NAME | awk -F"=" '{print \$2}'`
-zip -r \${branch}-`date '+%Y-%m-%d'`.zip *
+zip=`zip -r \${branch}-`date '+%Y-%m-%d'`.zip *`
+cp \${zip} \${zip}.new
 echo hmmmm
 """
 }
