@@ -6,7 +6,7 @@ properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/1 * * * 
 checkout scm
 sh """
 zip -r roles.zip *
-echo env.BRANCH_NAME
+echo 'env.BRANCH_NAME'
 echo hmmmm
 """
 }
