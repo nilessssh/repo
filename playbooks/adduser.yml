@@ -1,8 +1,0 @@
---- 
-- hosts: hosts
-  gather_facts: no
-  tasks:
-    - user:
-        name: test
-        comment: testing
-        state: present

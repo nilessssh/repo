@@ -1,5 +1,0 @@
----
-- hosts: hosts
-  gather_facts: false
-  roles:
-    - add_sshkey

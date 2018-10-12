@@ -1,6 +1,0 @@
----
-- hosts: hosts
-  gather_facts: false
-  tasks:
-    - command: init 0
-      ignore_error: true 
