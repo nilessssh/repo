@@ -9,7 +9,7 @@ zip -r roles.zip *
 echo hmmmm
 """
 }
-stage("zip" {
+stage("zip") {
 echo scmVars.GIT_BRANCH
 }
 }
