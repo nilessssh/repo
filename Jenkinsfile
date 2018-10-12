@@ -3,10 +3,10 @@ node('master') {
 sh 'git config --global http.sslVerify false'
 stage("testing ") {
 properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/1 * * * *')])])
+echo env.BRANCH_NAME
 checkout scm
 sh """
 zip -r roles.zip *
-echo 'env.BRANCH_NAME'
 echo hmmmm
 """
 }
